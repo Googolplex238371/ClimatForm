@@ -15,7 +15,7 @@
     <script>  
 function setup(){
   a = screen.width - 60
-        createCanvas(a,400)
+        createCanvas(a,600)
         background(255)
         noStroke()
         fill(255)
@@ -48,6 +48,7 @@ var object;
    textFont("Monospace")
   text(check(farenheitToCelsius(object.currently.temperature)),100,32);
    noStroke()
+   translate(0,150)
   for(i = 100; i >19*2.5; i-=2.5){
     noStroke()
      if(i/2.5 < 23){
@@ -59,7 +60,7 @@ var object;
      else{
        fill(0,255,0)
      }
-     rect(160,150-i,161,152.5-i)
+     rect(160,97.5-i,161,100-i)
   if(i%25 == 0){
     textSize(16)
     text(i/2.5.toString() + "°C",320,152.5-i)
