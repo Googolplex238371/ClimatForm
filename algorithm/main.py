@@ -10,5 +10,5 @@ def change():
       a = (x - x%i)/i
       x = x - i*a
       coins = coins + a
-  print(int(coins))
+      print(str(int(a)) + " "+ str(int(i)) + " cent coins")
 change()
