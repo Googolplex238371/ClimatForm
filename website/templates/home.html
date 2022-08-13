@@ -1,0 +1,97 @@
+{% extends "base.html" %}{%block title %}Home - Climate{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<ul>
+  <li><a class="active" href="">Home</a></li>
+  <li><a id = "navigator" href = "logout">Logout</a></li>
+</ul>
+{% else %}
+<ul>
+    <li><a href="register">Sign Up</a></li>
+  <li><a href="login">Login</a></li>
+</ul>
+{% endif %}
+    <script>  
+function setup(){
+  a = screen.width - 60
+        createCanvas(a,400)
+        background(255)
+        noStroke()
+        fill(255)
+        rect(0,0,67,400)
+      }
+      var getWeather = function() {
+        showWeather(1.3533089, 103.8762708)
+  }
+  function showWeather(lat, long) {
+    var url = `https://api.darksky.net/forecast/f672ff13193bfcc40427a678ebfdbc71/${lat},${long}` + `?format=jsonp&callback=displayWeather`;
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+    displayWeather(object)   
+  }
+      function farenheitToCelsius(k) {
+  return Math.round((k - 32) * 0.5556 );
+}
+
+var temperature;
+
+window.onload = function() {
+  getWeather()
+}
+var object;
+ function displayWeather(object) {
+   fill(0,0,0)
+   textSize(32)
+   textFont("Monospace")
+  text(check(farenheitToCelsius(object.currently.temperature)),100,32);
+   noStroke()
+  for(i = 100; i >19*2.5; i-=2.5){
+    noStroke()
+     if(i/2.5 < 23){
+       fill(0,125,255)
+     }
+     else if (i/2.5>32){
+       fill(255,0,0)
+     }
+     else{
+       fill(0,255,0)
+     }
+     rect(160,150-i,161,152.5-i)
+  if(i%25 == 0){
+    textSize(16)
+    text(i/2.5.toString() + "°C",320,152.5-i)
+  }}
+   strokeWeight(2)
+    stroke(0,0,0)
+    line(190,150 - 2.5*farenheitToCelsius(object.currently.temperature),450,300)
+  fill(0,0,0)
+   text("Current Temperature: " + farenheitToCelsius(object.currently.temperature).toString() + "°C",450,300)
+}
+
+function check(temp){
+  maxes = [30,31,31,31,31,31,31,31,31,31,30,29]
+  mins = [23,24,24,24,25,24,24,24,24,24,24,23]
+  const d = new Date();
+  let month = d.getMonth();
+  max = maxes[month]
+  min = mins[month]
+  if (temp < max && temp > min || temp == max || temp == min){
+    status = "The weather in Singapore is normal"
+  }
+  else if (temp > max){
+    status = "The weather in Singapore is " + Math.floor((temp - (max + min) /2)).toString() + " degrees Celsius hotter than usual"
+  }
+  else if (isNaN(parseInt(temp))){
+    status = "Loading"
+  }
+  else {
+    status = "The weather in Singapore is " + Math.floor((max + min)/2 - temp).toString() + " degrees Celsius colder than usual"
+  }
+  return status
+  
+}
+</script>
+{% endblock %}
