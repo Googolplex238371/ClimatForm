@@ -1,12 +1,14 @@
-def change(change):
+def change():
+  change = input("Enter Change Amount ")
   denoms = [25,10,5,1]
-  x = change
+  x = int(change)
   coins = 0
   for i in denoms:
     if x < i:
       pass
     else:
       a = (x - x%i)/i
-      x = a
-      coins = coins + 1
-  return coins
+      x = x - i*a
+      coins = coins + a
+  print(int(coins))
+change()
