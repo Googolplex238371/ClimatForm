@@ -1,0 +1,45 @@
+{% extends "base.html" %}{%block title %}Sign Up - saveclimate{% endblock %}
+{% block content %}
+<style>
+h1{
+  font-family: "Monaco", monospace;
+}
+p{
+  font-family: "Monaco", monospace;
+}
+.form{
+  background-color: #ddd;
+  padding: 10px;
+  height: 500px;
+}
+</style>
+{% if user.is_authenticated %}
+<ul>
+  <li><a href="">Home</a></li>
+  <li><a href = "logout">Logout</a></li>
+</ul>
+{% else %}
+<ul>
+    <li><a class="active" href="register">Sign Up</a></li>
+  <li><a href="login">Login</a></li>
+</ul>
+{% endif %}
+<div class ="form">
+<h1>Sign Up</h1>
+<form method = "POST">
+<p>Email: </p>
+<input type = "email" id = "email" name = "email"></input>
+<br />
+<p>Password: </p>
+<input type = "password" id = "password1" name = "password1"></input>
+<br />
+<p>Password (confirm): </p>
+<input type = "password" id = "password2" name = "password2"></input>
+<br />
+<br />
+<button type = "submit">Submit</button>
+</form>
+<p>Already have an account? <a href = "login">Log In!</a></p>
+</script>
+</div>
+{% endblock %}
